@@ -16,6 +16,10 @@ class LoginPasswordChanged extends LoginEvent {
   String get password => _password;
 }
 
+class ClearState extends LoginEvent {
+  const ClearState();
+}
+
 class LoginSubmit extends LoginEvent {
   const LoginSubmit();
 }

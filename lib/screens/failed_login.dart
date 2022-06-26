@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
 
-class FailedLogin extends StatefulWidget {
+class FailedLogin extends StatelessWidget {
   const FailedLogin({Key? key}) : super(key: key);
 
-  @override
-  State<StatefulWidget> createState() {
-    return _FailedLoginState();
-  }
-}
-
-class _FailedLoginState extends State<FailedLogin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,5 +17,4 @@ class _FailedLoginState extends State<FailedLogin> {
       ),
     );
   }
-
 }

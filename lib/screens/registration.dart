@@ -1,25 +1,14 @@
-import 'dart:convert';
-
-import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:login_app/screens/authentication/authentication_repository.dart';
-import 'package:login_app/screens/registration/registration_bloc.dart';
-import 'package:login_app/screens/registration/registration_event.dart';
-import 'package:login_app/screens/registration/registration_state.dart';
-import 'package:login_app/services/sqlite.dart';
-import 'package:sqflite/sqflite.dart';
 
-class Registration extends StatefulWidget {
+import 'package:login_app/authentication/authentication_repository.dart';
+import 'package:login_app/registration/registration_bloc.dart';
+import 'package:login_app/registration/registration_event.dart';
+import 'package:login_app/registration/registration_state.dart';
+
+
+class Registration extends StatelessWidget {
   const Registration({Key? key}) : super(key: key);
-
-  @override
-  State<StatefulWidget> createState() {
-    return _RegistrationState();
-  }
-}
-
-class _RegistrationState extends State<Registration> {
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +46,8 @@ class _RegistrationState extends State<Registration> {
                 BlocBuilder<RegistrationBloc, RegistrationState>(
                     builder: (context, state) {
                       return TextField(
+                        obscureText: true,
+                        obscuringCharacter: '*',
                         onChanged: (password) => context
                             .read<RegistrationBloc>()
                             .add(RegistrationPasswordChanged(password)) ,
@@ -71,6 +62,8 @@ class _RegistrationState extends State<Registration> {
                 BlocBuilder<RegistrationBloc, RegistrationState>(
                     builder: (context, state) {
                       return TextField(
+                        obscureText: true,
+                        obscuringCharacter: '*',
                         onChanged: (passwordRepeat) => context
                             .read<RegistrationBloc>()
                             .add(RegistrationPasswordRepeatChanged(passwordRepeat)),
