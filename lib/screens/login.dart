@@ -40,6 +40,7 @@ class Login extends StatelessWidget {
                     buildWhen: (previous, current) => previous.loginError != current.loginError,
                     builder: (context, state) {
                       return TextField(
+                        textInputAction: TextInputAction.next,
                         onChanged: (login) => context
                             .read<LoginBloc>()
                             .add(LoginLoginChanged(login)),
@@ -55,6 +56,9 @@ class Login extends StatelessWidget {
                       buildWhen: (previous, current) => previous.passwordError != current.passwordError,
                       builder: (context, state) {
                         return TextField(
+                          onSubmitted: (_) {
+                            context.read<LoginBloc>().add(const LoginSubmit());
+                          },
                           obscureText: true,
                           obscuringCharacter: '*',
                           onChanged: (password) => context

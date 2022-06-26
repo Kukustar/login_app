@@ -40,6 +40,7 @@ class Registration extends StatelessWidget {
                   BlocBuilder<RegistrationBloc, RegistrationState>(
                       builder: (context, state) {
                         return TextField(
+                          textInputAction: TextInputAction.next,
                           onChanged: (login) => context
                               .read<RegistrationBloc>()
                               .add(RegistrationLoginChanged(login)),
@@ -54,6 +55,7 @@ class Registration extends StatelessWidget {
                   BlocBuilder<RegistrationBloc, RegistrationState>(
                       builder: (context, state) {
                         return TextField(
+                          textInputAction: TextInputAction.next,
                           obscureText: true,
                           obscuringCharacter: '*',
                           onChanged: (password) => context
@@ -70,6 +72,11 @@ class Registration extends StatelessWidget {
                   BlocBuilder<RegistrationBloc, RegistrationState>(
                       builder: (context, state) {
                         return TextField(
+                          onSubmitted: (_) {
+                            context
+                                .read<RegistrationBloc>()
+                                .add(const RegistrationSubmit());
+                          },
                           obscureText: true,
                           obscuringCharacter: '*',
                           onChanged: (passwordRepeat) => context

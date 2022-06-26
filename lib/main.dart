@@ -73,6 +73,13 @@ class _AppViewState extends State<AppView> {
         onGenerateRoute: (_) => SplashPage.route(),
         theme: ThemeData(
             primarySwatch: Colors.blue,
+            elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ElevatedButton.styleFrom(
+                textStyle: const TextStyle(
+                  fontSize: 16
+                )
+              )
+            ),
             inputDecorationTheme: const InputDecorationTheme(
                 enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.blue)),
@@ -105,8 +112,9 @@ class _AppViewState extends State<AppView> {
                   );
                   break;
                 case AuthenticationStatus.successResetPassword:
-                  context.read<LoginBloc>().add(const ClearLoginState());
-                  _navigator.pop();
+                  _navigator.pushAndRemoveUntil<void>(
+                      MaterialPageRoute(builder: (_) =>  const Home()),
+                          (route) => false);
                   break;
                 default:
                   break;

@@ -39,10 +39,12 @@ class AuthenticationRepository {
 
   Future<void> logIn(String login, String password) async {
     if (login.isEmpty) {
+      _controller.add(AuthenticationStatus.failed);
       throw LoginFieldEmpty();
     }
 
     if (password.isEmpty) {
+      _controller.add(AuthenticationStatus.failed);
       throw PasswordFieldEmpty();
     }
 

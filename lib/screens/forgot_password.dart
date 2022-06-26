@@ -37,6 +37,7 @@ class ForgotPassword extends StatelessWidget {
                   BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
                       builder: (context, state) {
                     return TextField(
+                      textInputAction: TextInputAction.next,
                       onChanged: (login) => context
                           .read<ForgotPasswordBloc>()
                           .add(ForgotPasswordLoginChanged(login)),
@@ -50,6 +51,7 @@ class ForgotPassword extends StatelessWidget {
                   BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
                       builder: (context, state) {
                     return TextField(
+                      textInputAction: TextInputAction.next,
                       onChanged: (memorableWorld) => context
                           .read<ForgotPasswordBloc>()
                           .add(ForgotPasswordMemorableWorldChange(memorableWorld)),
@@ -64,6 +66,11 @@ class ForgotPassword extends StatelessWidget {
                   BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
                       builder: (context, state) {
                     return TextField(
+                      onSubmitted: (_) {
+                        context
+                            .read<ForgotPasswordBloc>()
+                            .add(const ForgotPasswordSubmit());
+                      },
                       obscureText: true,
                       obscuringCharacter: '*',
                       onChanged: (newPassword) => context
