@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
 
-class SuccessLogin extends StatefulWidget {
-  const SuccessLogin({Key? key}) : super(key: key);
+class FailedLogin extends StatefulWidget {
+  const FailedLogin({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return _SuccessLoginState();
+    return _FailedLoginState();
   }
 }
 
-class _SuccessLoginState extends State<SuccessLogin> {
+class _FailedLoginState extends State<FailedLogin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Успешная авторизация'),
+        title: const Text('Ошибка'),
       ),
       body: const Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: Center(
-          child: Image(image: AssetImage('assets/images/success.png'),),
+          child: Image(image: AssetImage('assets/images/failed.png'),),
         ),
       ),
     );
   }
-  
+
 }
