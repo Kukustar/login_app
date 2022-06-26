@@ -23,6 +23,10 @@ class RegistrationPasswordRepeatChanged extends RegistrationEvent {
   String get passwordRepeat => _passwordRepeat;
 }
 
+class ClearRegistrationState extends RegistrationEvent {
+  const ClearRegistrationState();
+}
+
 class RegistrationSubmit extends RegistrationEvent {
   const RegistrationSubmit();
 }

@@ -10,7 +10,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<LoginLoginChanged>(_onLoginChanged);
     on<LoginPasswordChanged>(_onPasswordChanged);
     on<LoginSubmit>(_onLoginSubmit);
-    on<ClearState>(_onClearState);
+    on<ClearLoginState>(_onClearState);
   }
 
   final AuthenticationRepository repository;
@@ -25,7 +25,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(state.copyWith(password: password, passwordError: ''));
   }
 
-  void _onClearState(ClearState event, Emitter<LoginState> emit) {
+  void _onClearState(ClearLoginState event, Emitter<LoginState> emit) {
     emit(state.copyWith(
         loginError: '',
         login: '',
@@ -37,6 +37,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   void _onLoginSubmit(LoginSubmit event, Emitter<LoginState> emit) async {
     try {
       await repository.logIn(state.login, state.password);
+    } on LoginFieldEmpty {
+      emit(state.copyWith(loginError: "Поле не может быть пустым"));
+    } on PasswordFieldEmpty {
+      emit(state.copyWith(passwordError: "Поле не может быть пустым"));
     } on NoUserFound {
       emit(state.copyWith(loginError: "Такого пользователя не существует"));
     } on WrongPassword {

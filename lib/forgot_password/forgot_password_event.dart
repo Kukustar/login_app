@@ -23,6 +23,10 @@ class ForgotPasswordMemorableWorldChange extends ForgotPasswordEvent {
   String get memorableWorld => _memorableWorld;
 }
 
+class ClearForgotPasswordState extends ForgotPasswordEvent {
+  const ClearForgotPasswordState();
+}
+
 class ForgotPasswordSubmit extends ForgotPasswordEvent {
   const ForgotPasswordSubmit();
 }

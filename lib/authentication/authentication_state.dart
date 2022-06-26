@@ -1,4 +1,9 @@
-enum AuthenticationStatus { authenticated, unauthenticated, failed, successResetPassword }
+enum AuthenticationStatus {
+  authenticated,
+  unauthenticated,
+  failed,
+  successResetPassword,
+}
 
 class AuthenticationState {
   const AuthenticationState({

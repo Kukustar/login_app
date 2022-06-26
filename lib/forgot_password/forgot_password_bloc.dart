@@ -10,6 +10,7 @@ class ForgotPasswordBloc extends Bloc<ForgotPasswordEvent, ForgotPasswordState> 
     on<ForgotPasswordLoginChanged>(_onForgotPasswordLoginChanged);
     on<ForgotPasswordNewPasswordChanged>(_onForgotPasswordNewPasswordChanged);
     on<ForgotPasswordMemorableWorldChange>(_onForgotPasswordMemorableWorldChange);
+    on<ClearForgotPasswordState>(_onClearState);
     on<ForgotPasswordSubmit>(_onForgotPasswordSubmit);
   }
 
@@ -54,6 +55,17 @@ class ForgotPasswordBloc extends Bloc<ForgotPasswordEvent, ForgotPasswordState> 
         print(exception);
       }
     }
+  }
+
+  void _onClearState(ClearForgotPasswordState event, Emitter<ForgotPasswordState> emit) {
+    emit(state.copyWith(
+      memorableWorld: '',
+      memorableWorldError: '',
+      newPasswordError: '',
+      newPassword: '',
+      login: '',
+      loginError: ''
+    ));
   }
 
 }

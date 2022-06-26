@@ -37,11 +37,21 @@ class AuthenticationRepository {
     yield* _memorableWorldController.stream;
   }
 
-  Future<void> logIn(login, password) async {
-    Database db = await createOrGetDatabase();
+  Future<void> logIn(String login, String password) async {
+    if (login.isEmpty) {
+      throw LoginFieldEmpty();
+    }
 
-    final List<Map<String, dynamic>> users =
-        await db.query('USER', where: "LOGIN = ?", whereArgs: [login]);
+    if (password.isEmpty) {
+      throw PasswordFieldEmpty();
+    }
+
+    Database db = await createOrGetDatabase();
+    final List<Map<String, dynamic>> users = await db.query(
+        'USER',
+        where: "LOGIN = ?",
+        whereArgs: [login]
+    );
     if (users.isEmpty) {
       _controller.add(AuthenticationStatus.failed);
       throw NoUserFound();
@@ -78,9 +88,12 @@ class AuthenticationRepository {
       _controller.add(AuthenticationStatus.failed);
       throw PasswordNotEqual();
     }
-
     Database db = await createOrGetDatabase();
-    final List<Map <String, dynamic>> user = await db.query('USER', where: "LOGIN = ?", whereArgs: [login]);
+    final List<Map <String, dynamic>> user = await db.query(
+        'USER',
+        where: "LOGIN = ?",
+        whereArgs: [login]
+    );
     if (user.isNotEmpty) {
       _controller.add(AuthenticationStatus.failed);
       throw UserAlreadyExist();
@@ -92,6 +105,8 @@ class AuthenticationRepository {
       "PASSWORD": md5Password,
       "MEMORABLE_WORD": memorableWord
     }));
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('USER', login);
     _controller.add(AuthenticationStatus.authenticated);
     _memorableWorldController.add(memorableWord);
   }
@@ -107,8 +122,7 @@ class AuthenticationRepository {
       throw PasswordFieldEmpty();
     }
     Database db = await createOrGetDatabase();
-    final List<Map<String, dynamic>> users =
-    await db.query('USER', where: "LOGIN = ?", whereArgs: [login]);
+    final List<Map<String, dynamic>> users = await db.query('USER', where: "LOGIN = ?", whereArgs: [login]);
     if (users.isEmpty) {
       _controller.add(AuthenticationStatus.failed);
       throw NoUserFound();
@@ -136,6 +150,7 @@ class AuthenticationRepository {
   Future<void> logOut() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.remove('USER');
+    _controller.add(AuthenticationStatus.unauthenticated);
   }
 
   void dispose() {

@@ -11,6 +11,7 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
     on<RegistrationLoginChanged>(_onRegistrationLoginChanged);
     on<RegistrationPasswordChanged>(_onRegistrationPasswordChanged);
     on<RegistrationPasswordRepeatChanged>(_onRegistrationPasswordRepeatChanged);
+    on<ClearRegistrationState>(_onClearRegistrationState);
     on<RegistrationSubmit>(_onRegistrationSubmit);
   }
 
@@ -48,5 +49,16 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
         print('Error in _onRegistrationSubmit $exception');
       }
     }
+  }
+
+  void _onClearRegistrationState(ClearRegistrationState event, Emitter<RegistrationState> emit) {
+    emit(state.copyWith(
+      loginError: '',
+      login: '',
+      password: '',
+      passwordError: '',
+      passwordRepeat: '',
+      passwordRepeatError: ''
+    ));
   }
 }

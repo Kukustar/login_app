@@ -38,7 +38,6 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
 
   Future<void> _onLogout(LogAut event, Emitter<AuthenticationState> emit) async {
     await _authenticationRepository.logOut();
-    emit(state.copyWith(memorableWorld: '', status: AuthenticationStatus.unauthenticated));
   }
 
   @override

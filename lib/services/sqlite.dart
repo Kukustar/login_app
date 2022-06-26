@@ -1,6 +1,4 @@
-
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -26,7 +24,7 @@ Future<Database> createOrGetDatabase() async {
   return database;
 }
 
-Future<void> initDatabase() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await createOrGetDatabase();
-}
+// Future<void> initDatabase() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   await createOrGetDatabase();
+// }

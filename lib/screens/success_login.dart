@@ -13,9 +13,9 @@ class SuccessLogin extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.power_settings_new),
+          icon: const Icon(Icons.power_settings_new),
           onPressed: () {
-            BlocProvider.of<AuthenticationBloc>(context, listen: false).add(LogAut());
+            BlocProvider.of<AuthenticationBloc>(context, listen: false).add(const LogAut());
           },
         ),
         title: const Text('Успешная авторизация'),
@@ -46,7 +46,7 @@ class SuccessLogin extends StatelessWidget {
                                   ClipboardData(text: state.memorableWorld)
                               );
                             },
-                            icon: Icon(Icons.content_copy)
+                            icon: const Icon(Icons.content_copy)
                         )
                       ],
                     )
