@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-Future<Database> createDatabase() async {
+Future<Database> createOrGetDatabase() async {
   final Database database = await openDatabase(
     join(await getDatabasesPath(), 'login_app_database'),
     onCreate: (db, version) async {
@@ -28,5 +28,5 @@ Future<Database> createDatabase() async {
 
 Future<void> initDatabase() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await createDatabase();
+  await createOrGetDatabase();
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:login_app/screens/login.dart';
+import 'package:login_app/screens/login/login.dart';
 import 'package:login_app/screens/registration.dart';
 
 class Home extends StatefulWidget {
@@ -15,18 +15,18 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Авторизация"),
+          title: const Text("Авторизация"),
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Text(
+              const Text(
                 'Добро пожаловать в приложение, войдите или зарегестраруйтесь',
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               SizedBox(
                 height: 50,
                 width: double.infinity,
@@ -34,13 +34,13 @@ class _HomeState extends State<Home> {
                     onPressed: () {
                       Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => Login())
+                          MaterialPageRoute(builder: (context) => const Login())
                       );
                     },
-                    child: Text('Вход')
+                    child: const Text('Вход')
                 ),
               ),
-              SizedBox(height: 10,),
+              const SizedBox(height: 10,),
               SizedBox(
                 height: 50,
                 width: double.infinity,
@@ -48,10 +48,10 @@ class _HomeState extends State<Home> {
                     onPressed: () {
                       Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => Registration())
+                          MaterialPageRoute(builder: (context) => const Registration())
                       );
                     },
-                    child: Text('Регистрация')
+                    child: const Text('Регистрация')
                 ),
               ),
             ],
