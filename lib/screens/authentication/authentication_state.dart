@@ -1,4 +1,4 @@
-enum AuthenticationStatus { authenticated, unauthenticated }
+enum AuthenticationStatus { authenticated, unauthenticated, failed }
 
 class AuthenticationState {
   const AuthenticationState({ this.status = AuthenticationStatus.unauthenticated });

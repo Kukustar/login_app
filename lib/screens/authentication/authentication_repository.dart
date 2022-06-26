@@ -26,7 +26,9 @@ class AuthenticationRepository {
 
       final List<Map<String, dynamic>> users = await db.query('USER', where: "LOGIN = ?", whereArgs: [login]);
       if (users.isEmpty) {
+        _controller.add(AuthenticationStatus.failed);
         throw NoUserFoundException();
+        
       }
       if (users.length > 1) {
         throw Exception('Data in bd not valid');

@@ -14,7 +14,7 @@ class _SuccessLoginState extends State<SuccessLogin> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Успешно'),
+        title: const Text('Успешная авторизация'),
       ),
       body: const Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.0),

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login_app/screens/authentication/authentication_bloc.dart';
 import 'package:login_app/screens/authentication/authentication_repository.dart';
 import 'package:login_app/screens/authentication/authentication_state.dart';
+import 'package:login_app/screens/failed_login.dart';
 import 'package:login_app/screens/home.dart';
 import 'package:login_app/screens/success_login.dart';
 import 'package:login_app/services/sqlite.dart';
@@ -78,6 +79,11 @@ class _AppViewState extends State<AppView> {
                   _navigator.pushAndRemoveUntil<void>(
                       MaterialPageRoute(builder: (_) =>  const Home()),
                           (route) => false);
+                  break;
+                case AuthenticationStatus.failed:
+                  _navigator.push<void>(
+                      MaterialPageRoute(builder: (context) => const FailedLogin())
+                  );
                   break;
                 default:
                   break;
