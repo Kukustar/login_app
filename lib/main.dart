@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:login_app/screens/authentication/authentication_bloc.dart';
-import 'package:login_app/screens/authentication/authentication_repository.dart';
-import 'package:login_app/screens/authentication/authentication_state.dart';
+import 'package:login_app/authentication/authentication_bloc.dart';
+import 'package:login_app/authentication/authentication_repository.dart';
+import 'package:login_app/authentication/authentication_state.dart';
+import 'package:login_app/login/login_bloc.dart';
+import 'package:login_app/login/login_event.dart';
+
 import 'package:login_app/screens/failed_login.dart';
 import 'package:login_app/screens/home.dart';
 import 'package:login_app/screens/success_login.dart';
@@ -27,8 +30,15 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return RepositoryProvider.value(
       value: authenticationRepository,
-      child: BlocProvider(
-        create: (_) => AuthenticationBloc(repository: authenticationRepository),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider<AuthenticationBloc>(
+              create: (_) => AuthenticationBloc(repository: authenticationRepository)
+          ),
+          BlocProvider<LoginBloc>(
+              create: (_) => LoginBloc(repository: authenticationRepository)
+          )
+        ],
         child: const AppView(),
       ),
     );
@@ -84,6 +94,10 @@ class _AppViewState extends State<AppView> {
                   _navigator.push<void>(
                       MaterialPageRoute(builder: (context) => const FailedLogin())
                   );
+                  break;
+                case AuthenticationStatus.successResetPassword:
+                  context.read<LoginBloc>().add(const ClearState());
+                  _navigator.pop();
                   break;
                 default:
                   break;

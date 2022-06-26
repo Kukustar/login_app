@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:login_app/screens/login/login.dart';
-import 'package:login_app/screens/registration/registration.dart';
 
-class Home extends StatefulWidget {
-  const Home({ Key? key }) : super(key: key);
+import 'package:login_app/screens/login.dart';
+import 'package:login_app/screens/registration.dart';
 
-  @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
+class Home extends StatelessWidget {
+  const Home({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
