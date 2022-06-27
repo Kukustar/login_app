@@ -1,8 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:login_app/authentication/authentication_repository.dart';
+import 'package:login_app/generated/l10n.dart';
 import 'package:login_app/login/login_event.dart';
 import 'package:login_app/login/login_state.dart';
+import 'package:login_app/services/transform_key_to_error.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc({ required this.repository }) : super(const LoginState()) {
@@ -42,13 +44,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     try {
       await repository.logIn(state.login, state.password);
     } on LoginFieldEmpty {
-      emit(state.copyWith(loginError: "Поле не может быть пустым"));
+      emit(state.copyWith(loginError: EMPTY_FIELD));
     } on PasswordFieldEmpty {
-      emit(state.copyWith(passwordError: "Поле не может быть пустым"));
+      emit(state.copyWith(passwordError: EMPTY_FIELD));
     } on NoUserFound {
-      emit(state.copyWith(loginError: "Такого пользователя не существует"));
+      emit(state.copyWith(loginError: THERE_IS_NO_SUCH_USER));
     } on WrongPassword {
-      emit(state.copyWith(passwordError: "Неверный пароль"));
+      emit(state.copyWith(passwordError: WRONG_PASSWORD));
     } catch (exception) {
       if (kDebugMode) {
         print('Error in _onLoginSubmit $exception');

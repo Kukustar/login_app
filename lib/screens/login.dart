@@ -1,10 +1,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:login_app/generated/l10n.dart';
 
 import 'package:login_app/login/login_bloc.dart';
 import 'package:login_app/login/login_event.dart';
 import 'package:login_app/login/login_state.dart';
 import 'package:login_app/screens/forgot_password.dart';
+import 'package:login_app/services/transform_key_to_error.dart';
 
 class Login extends StatelessWidget {
   const Login({Key? key}) : super(key: key);
@@ -29,7 +31,7 @@ class Login extends StatelessWidget {
         child: Scaffold(
           resizeToAvoidBottomInset: true,
           appBar: AppBar(
-            title: const Text('Вход'),
+            title: Text(S.of(context).enter),
           ),
           body: SingleChildScrollView(
             child: Padding(
@@ -45,8 +47,8 @@ class Login extends StatelessWidget {
                             .read<LoginBloc>()
                             .add(LoginLoginChanged(login)),
                         decoration: InputDecoration(
-                          label: const Text('Логин'),
-                          errorText: state.loginError == '' ? null : state.loginError
+                          label: Text(S.of(context).login),
+                          errorText: state.loginError == '' ? null : getErrorTranslation(context, state.loginError)
                         ),
                       );
                     },
@@ -72,8 +74,8 @@ class Login extends StatelessWidget {
                                     state.showPassword ? Icons.visibility : Icons.visibility_off
                                 ),
                               ),
-                              label: const Text('Пароль'),
-                              errorText: state.passwordError == '' ? null : state.passwordError
+                              label: Text(S.of(context).password),
+                              errorText: state.passwordError == '' ? null : getErrorTranslation(context, state.passwordError)
                           ),
                         );
                       }
@@ -89,7 +91,7 @@ class Login extends StatelessWidget {
                               )
                           );
                         },
-                        child: const Text('Забыли пароль?')
+                        child: Text(S.of(context).forgotPassword)
                     ),
                   ),
                   const SizedBox(height: 5),
@@ -106,7 +108,7 @@ class Login extends StatelessWidget {
                             }
                             context.read<LoginBloc>().add(const LoginSubmit());
                           },
-                          child: const Text('Вход'),
+                          child: Text(S.of(context).enter),
                         );
                       },
                     ),

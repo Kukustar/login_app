@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:login_app/generated/l10n.dart';
+
 import 'package:login_app/authentication/authentication_bloc.dart';
 import 'package:login_app/authentication/authentication_repository.dart';
 import 'package:login_app/authentication/authentication_state.dart';
@@ -68,6 +71,7 @@ class _AppViewState extends State<AppView> {
   Widget build(BuildContext context) {
 
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Авторизация',
         navigatorKey: _navigatorKey,
         onGenerateRoute: (_) => SplashPage.route(),
@@ -91,6 +95,13 @@ class _AppViewState extends State<AppView> {
                     borderSide: BorderSide(color: Colors.red))
             )
         ),
+        localizationsDelegates: const [
+          S.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: S.delegate.supportedLocales,
         builder: (context, child) {
           return BlocListener<AuthenticationBloc, AuthenticationState>(
             listener: (context, state) {
@@ -118,7 +129,7 @@ class _AppViewState extends State<AppView> {
                       MaterialPageRoute(builder: (_) =>  const Home()),
                           (route) => false);
                   ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Пароль успешно востановлен!'),
+                       SnackBar(content: Text(S.of(context).passwordHasBeenSuccessfullyRestored),
                       )
                   );
                   break;

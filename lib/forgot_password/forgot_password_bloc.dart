@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:login_app/authentication/authentication_repository.dart';
 import 'package:login_app/forgot_password/forgot_password_event.dart';
 import 'package:login_app/forgot_password/forgot_password_state.dart';
+import 'package:login_app/services/transform_key_to_error.dart';
 
 class ForgotPasswordBloc extends Bloc<ForgotPasswordEvent, ForgotPasswordState> {
   ForgotPasswordBloc({ required this.repository }) : super(const ForgotPasswordState()) {
@@ -46,15 +47,15 @@ class ForgotPasswordBloc extends Bloc<ForgotPasswordEvent, ForgotPasswordState> 
           state.newPassword
       );
     } on LoginFieldEmpty {
-      emit(state.copyWith(loginError: "Поле не может быть пустым"));
+      emit(state.copyWith(loginError: EMPTY_FIELD));
     } on MemorableFieldEmpty  {
-      emit(state.copyWith(memorableWorld: "Поле не может быть пустым"));
+      emit(state.copyWith(memorableWorld: EMPTY_FIELD));
     } on PasswordFieldEmpty {
-      emit(state.copyWith(newPasswordError: "Поле не может быть пустым"));
+      emit(state.copyWith(newPasswordError: EMPTY_FIELD));
     } on NoUserFound {
-      emit(state.copyWith(loginError: "Такого пользователя не существует"));
+      emit(state.copyWith(loginError: THERE_IS_NO_SUCH_USER));
     } on WrongMemorableWorld {
-      emit(state.copyWith(memorableWorld: "Неправильный ключ восстановления"));
+      emit(state.copyWith(memorableWorld: INCORRECT_RECOVERY_KEY));
     } catch (exception) {
       if (kDebugMode){
         print(exception);
