@@ -115,12 +115,15 @@ class AuthenticationRepository {
 
   Future<void> resetPassword(String login, String memorableWorld, String newPassword) async {
     if (login.isEmpty) {
+      _controller.add(AuthenticationStatus.failed);
       throw LoginFieldEmpty();
     }
     if (memorableWorld.isEmpty) {
+      _controller.add(AuthenticationStatus.failed);
       throw MemorableFieldEmpty();
     }
     if (newPassword.isEmpty) {
+      _controller.add(AuthenticationStatus.failed);
       throw PasswordFieldEmpty();
     }
     Database db = await createOrGetDatabase();

@@ -22,7 +22,7 @@
   "recoveryKey" : "Ключ для восстановления",
   "newPassword" : "Новый пароль",
   "recover" : "Восстановить",
-  "successfulAuthorization": "Successful authorization",
-  "saveKeyForPasswordRecovery": "Save this key for password recovery",
+  "successfulAuthorization": "Успешная авторизация",
+  "saveKeyForPasswordRecovery": "Сохраните этот ключ для восстановления пароля",
   "error": "Ошибка"
 }

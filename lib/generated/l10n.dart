@@ -270,20 +270,20 @@ class S {
     );
   }
 
-  /// `Successful authorization`
+  /// `Успешная авторизация`
   String get successfulAuthorization {
     return Intl.message(
-      'Successful authorization',
+      'Успешная авторизация',
       name: 'successfulAuthorization',
       desc: '',
       args: [],
     );
   }
 
-  /// `Save this key for password recovery`
+  /// `Сохраните этот ключ для восстановления пароля`
   String get saveKeyForPasswordRecovery {
     return Intl.message(
-      'Save this key for password recovery',
+      'Сохраните этот ключ для восстановления пароля',
       name: 'saveKeyForPasswordRecovery',
       desc: '',
       args: [],

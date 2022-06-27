@@ -49,13 +49,13 @@ class ForgotPasswordBloc extends Bloc<ForgotPasswordEvent, ForgotPasswordState> 
     } on LoginFieldEmpty {
       emit(state.copyWith(loginError: EMPTY_FIELD));
     } on MemorableFieldEmpty  {
-      emit(state.copyWith(memorableWorld: EMPTY_FIELD));
+      emit(state.copyWith(memorableWorldError: EMPTY_FIELD));
     } on PasswordFieldEmpty {
       emit(state.copyWith(newPasswordError: EMPTY_FIELD));
     } on NoUserFound {
       emit(state.copyWith(loginError: THERE_IS_NO_SUCH_USER));
     } on WrongMemorableWorld {
-      emit(state.copyWith(memorableWorld: INCORRECT_RECOVERY_KEY));
+      emit(state.copyWith(memorableWorldError: INCORRECT_RECOVERY_KEY));
     } catch (exception) {
       if (kDebugMode){
         print(exception);

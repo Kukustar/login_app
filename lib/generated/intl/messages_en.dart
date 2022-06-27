@@ -52,9 +52,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Repeat password"),
         "russian": MessageLookupByLibrary.simpleMessage("Russian"),
         "saveKeyForPasswordRecovery": MessageLookupByLibrary.simpleMessage(
-            "Сохраните этот ключ для восстановления пароля"),
+            "Save this key for password recovery"),
         "successfulAuthorization":
-            MessageLookupByLibrary.simpleMessage("Успешная авторизация"),
+            MessageLookupByLibrary.simpleMessage("Successful authorization"),
         "thereIsNoSuchUser":
             MessageLookupByLibrary.simpleMessage("There is no such user"),
         "userExist": MessageLookupByLibrary.simpleMessage(
