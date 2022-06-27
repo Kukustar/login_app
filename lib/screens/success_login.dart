@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:login_app/authentication/authentication_bloc.dart';
 import 'package:login_app/authentication/authentication_event.dart';
 import 'package:login_app/authentication/authentication_state.dart';
@@ -23,10 +24,10 @@ class SuccessLogin extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children:  [
-            const Image(image: AssetImage('assets/images/success.png')),
             const SizedBox(height: 100),
+            const Image(image: AssetImage('assets/images/success.png')),
+            const SizedBox(height: 50),
             BlocBuilder<AuthenticationBloc, AuthenticationState>(
               builder: (context, state) {
                 return state.memorableWorld.isNotEmpty ? Column(
@@ -39,7 +40,13 @@ class SuccessLogin extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(state.memorableWorld),
+                        Text(
+                          state.memorableWorld,
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold
+                          ),
+                        ),
                         IconButton(
                             onPressed: () async {
                               Clipboard.setData(

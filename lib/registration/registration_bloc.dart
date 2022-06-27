@@ -4,8 +4,6 @@ import 'package:login_app/authentication/authentication_repository.dart';
 import 'package:login_app/registration/registration_event.dart';
 import 'package:login_app/registration/registration_state.dart';
 
-
-
 class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
   RegistrationBloc({ required this.repository }) : super(const RegistrationState()) {
     on<RegistrationLoginChanged>(_onRegistrationLoginChanged);

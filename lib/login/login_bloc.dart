@@ -4,7 +4,6 @@ import 'package:login_app/authentication/authentication_repository.dart';
 import 'package:login_app/login/login_event.dart';
 import 'package:login_app/login/login_state.dart';
 
-
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc({ required this.repository }) : super(const LoginState()) {
     on<LoginLoginChanged>(_onLoginChanged);

@@ -67,5 +67,4 @@ class ForgotPasswordBloc extends Bloc<ForgotPasswordEvent, ForgotPasswordState> 
       loginError: ''
     ));
   }
-
 }

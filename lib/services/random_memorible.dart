@@ -2,7 +2,6 @@ import 'dart:math';
 
 const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
 
-
 String getRandomString() {
   Random _rnd = Random();
   return String.fromCharCodes(Iterable.generate(

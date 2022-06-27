@@ -23,8 +23,3 @@ Future<Database> createOrGetDatabase() async {
 
   return database;
 }
-
-// Future<void> initDatabase() async {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   await createOrGetDatabase();
-// }
