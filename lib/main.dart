@@ -115,6 +115,10 @@ class _AppViewState extends State<AppView> {
                   _navigator.pushAndRemoveUntil<void>(
                       MaterialPageRoute(builder: (_) =>  const Home()),
                           (route) => false);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Пароль успешно востановлен!'),
+                      )
+                  );
                   break;
                 default:
                   break;
