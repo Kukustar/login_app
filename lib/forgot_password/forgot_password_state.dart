@@ -6,6 +6,7 @@ class ForgotPasswordState {
     this.newPasswordError = '',
     this.loginError = '',
     this.memorableWorldError = '',
+    this.showPassword = false,
   });
 
   final String login;
@@ -16,6 +17,8 @@ class ForgotPasswordState {
   final String newPasswordError;
   final String memorableWorldError;
 
+  final bool showPassword;
+
   ForgotPasswordState copyWith({
     String? login,
     String? newPassword,
@@ -23,6 +26,7 @@ class ForgotPasswordState {
     String? newPasswordError,
     String? memorableWorld,
     String? memorableWorldError,
+    bool? showPassword
   }) {
     return ForgotPasswordState(
         login: login ?? this.login,
@@ -31,7 +35,7 @@ class ForgotPasswordState {
         loginError: loginError ?? this.loginError,
         newPasswordError: newPasswordError ?? this.newPasswordError,
         memorableWorldError: memorableWorldError ?? this.memorableWorldError,
-
+        showPassword: showPassword ?? this.showPassword
     );
   }
 }

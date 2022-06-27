@@ -10,6 +10,8 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
     on<RegistrationPasswordChanged>(_onRegistrationPasswordChanged);
     on<RegistrationPasswordRepeatChanged>(_onRegistrationPasswordRepeatChanged);
     on<ClearRegistrationState>(_onClearRegistrationState);
+    on<RegistrationShowPassword>(_onRegistrationShowPassword);
+    on<RegistrationShowPasswordRepeat>(_onRegistrationShowPasswordRepeat);
     on<RegistrationSubmit>(_onRegistrationSubmit);
   }
 
@@ -28,6 +30,14 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
   void _onRegistrationPasswordRepeatChanged(RegistrationPasswordRepeatChanged event, Emitter<RegistrationState> emit) {
     final passwordRepeat = event.passwordRepeat;
     emit(state.copyWith(passwordRepeatError: '', passwordRepeat: passwordRepeat));
+  }
+
+  void _onRegistrationShowPassword(RegistrationShowPassword event, Emitter<RegistrationState> emit) {
+    emit(state.copyWith(showPassword: !state.showPassword));
+  }
+
+  void _onRegistrationShowPasswordRepeat(RegistrationShowPasswordRepeat event, Emitter<RegistrationState> emit) {
+    emit(state.copyWith(showPasswordRepeat: !state.showPasswordRepeat));
   }
 
   void _onRegistrationSubmit(RegistrationSubmit event, Emitter<RegistrationState> emit) async {
@@ -56,7 +66,9 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
       password: '',
       passwordError: '',
       passwordRepeat: '',
-      passwordRepeatError: ''
+      passwordRepeatError: '',
+      showPassword: false,
+      showPasswordRepeat: false
     ));
   }
 }

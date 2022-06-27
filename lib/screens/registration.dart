@@ -56,12 +56,21 @@ class Registration extends StatelessWidget {
                       builder: (context, state) {
                         return TextField(
                           textInputAction: TextInputAction.next,
-                          obscureText: true,
+                          obscureText: !state.showPassword,
                           obscuringCharacter: '*',
                           onChanged: (password) => context
                               .read<RegistrationBloc>()
                               .add(RegistrationPasswordChanged(password)) ,
                           decoration: InputDecoration(
+                            suffix: GestureDetector(
+                              onTap: () {
+                                context.read<RegistrationBloc>()
+                                    .add(const RegistrationShowPassword());
+                              },
+                              child: Icon(
+                                  state.showPassword ? Icons.visibility : Icons.visibility_off
+                              ),
+                            ),
                             label: const Text('Пароль'),
                             errorText: state.passwordError == '' ? null : state.passwordError
                           ),
@@ -77,12 +86,20 @@ class Registration extends StatelessWidget {
                                 .read<RegistrationBloc>()
                                 .add(const RegistrationSubmit());
                           },
-                          obscureText: true,
+                          obscureText: !state.showPasswordRepeat,
                           obscuringCharacter: '*',
                           onChanged: (passwordRepeat) => context
                               .read<RegistrationBloc>()
                               .add(RegistrationPasswordRepeatChanged(passwordRepeat)),
                           decoration: InputDecoration(
+                            suffix: GestureDetector(
+                              onTap: () {
+                                context.read<RegistrationBloc>().add(const RegistrationShowPasswordRepeat());
+                              },
+                              child: Icon(
+                                state.showPasswordRepeat ? Icons.visibility : Icons.visibility_off
+                              ),
+                            ),
                             label: const Text('Повтор пароля'),
                             errorText: state.passwordRepeatError == '' ? null : state.passwordRepeatError
                           ),

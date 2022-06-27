@@ -10,6 +10,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<LoginPasswordChanged>(_onPasswordChanged);
     on<LoginSubmit>(_onLoginSubmit);
     on<ClearLoginState>(_onClearState);
+    on<LoginShowPassword>(_onLoginShowPassword);
   }
 
   final AuthenticationRepository repository;
@@ -31,6 +32,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         passwordError: '',
         password: '')
     );
+  }
+
+  void _onLoginShowPassword(LoginShowPassword event, Emitter<LoginState> emit) {
+    emit(state.copyWith(showPassword: !state.showPassword));
   }
 
   void _onLoginSubmit(LoginSubmit event, Emitter<LoginState> emit) async {
