@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
+
 import 'package:login_app/authentication/authentication_repository.dart';
-import 'package:login_app/generated/l10n.dart';
 import 'package:login_app/login/login_event.dart';
 import 'package:login_app/login/login_state.dart';
 import 'package:login_app/services/transform_key_to_error.dart';

@@ -21,32 +21,30 @@ class Home extends StatelessWidget {
             height: MediaQuery.of(context).size.height,
             child: Column(
               children: [
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
                 ListTile(
                   title: DropdownButton(
-                    underline: SizedBox(),
+                    underline: const SizedBox(),
                     value: selectedLocale,
                     onChanged: (value) async {
                       switch(value)  {
                         case 'Английский':
                         case 'English':
-                          S.load(Locale('en', ''));
+                          S.load(const Locale('en', ''));
                           Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(builder:
-                              (context) => Home()),
+                              (context) => const Home()),
                                   (route) => false
                           );
-                          // await locator<ServiceSecureStorage>().writeKey('user_locale', 'en');
-                          // locator<NavigationService>().pushNamedAndRemoveUntil(routes.homeRoute);
                           break;
                         case 'Русский':
                         case 'Russian':
-                          S.load(Locale('ru', ''));
+                          S.load(const Locale('ru', ''));
                           Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(builder:
-                                  (context) => Home()),
+                                  (context) => const Home()),
                                   (route) => false
                           );
                           break;
