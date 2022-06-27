@@ -37,6 +37,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
   }
 
   Future<void> _onLogout(LogAut event, Emitter<AuthenticationState> emit) async {
+    emit(state.copyWith(memorableWorld: ''));
     await _authenticationRepository.logOut();
   }
 
