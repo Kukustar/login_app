@@ -49,6 +49,7 @@ class Home extends StatelessWidget {
                     child: const Text('Регистрация')
                 ),
               ),
+              const SizedBox(height: 30)
             ],
           ),
         )
