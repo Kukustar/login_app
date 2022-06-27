@@ -71,12 +71,22 @@ class ForgotPassword extends StatelessWidget {
                             .read<ForgotPasswordBloc>()
                             .add(const ForgotPasswordSubmit());
                       },
-                      obscureText: true,
+                      obscureText: !state.showPassword,
                       obscuringCharacter: '*',
                       onChanged: (newPassword) => context
                           .read<ForgotPasswordBloc>()
                           .add(ForgotPasswordNewPasswordChanged(newPassword)),
                       decoration: InputDecoration(
+                          suffix: GestureDetector(
+                            onTap: () {
+                              context
+                                  .read<ForgotPasswordBloc>()
+                                  .add(const ForgotPasswordShowPasswordChange());
+                            },
+                            child: Icon(
+                                state.showPassword ? Icons.visibility : Icons.visibility_off
+                            ),
+                          ),
                           label: const Text('Новый пароль'),
                           errorText: state.newPasswordError == ''
                               ? null

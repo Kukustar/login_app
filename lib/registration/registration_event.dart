@@ -27,6 +27,15 @@ class ClearRegistrationState extends RegistrationEvent {
   const ClearRegistrationState();
 }
 
+class RegistrationShowPassword extends RegistrationEvent {
+  const RegistrationShowPassword();
+}
+
+class RegistrationShowPasswordRepeat extends RegistrationEvent {
+  const RegistrationShowPasswordRepeat();
+}
+
+
 class RegistrationSubmit extends RegistrationEvent {
   const RegistrationSubmit();
 }

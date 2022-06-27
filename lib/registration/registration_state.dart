@@ -5,7 +5,9 @@ class RegistrationState {
     this.passwordRepeat = '',
     this.loginError = '',
     this.passwordError = '',
-    this.passwordRepeatError = ''
+    this.passwordRepeatError = '',
+    this.showPassword = false,
+    this.showPasswordRepeat = false,
 });
 
   final String login;
@@ -16,13 +18,18 @@ class RegistrationState {
   final String passwordError;
   final String passwordRepeatError;
 
+  final bool showPassword;
+  final bool showPasswordRepeat;
+
   RegistrationState copyWith({
     String? login,
     String? password,
     String? passwordRepeat,
     String? loginError,
     String? passwordError,
-    String? passwordRepeatError
+    String? passwordRepeatError,
+    bool? showPassword,
+    bool? showPasswordRepeat,
   }) {
     return RegistrationState(
       login: login ?? this.login,
@@ -30,7 +37,9 @@ class RegistrationState {
       passwordRepeat: passwordRepeat ?? this.passwordRepeat,
       loginError: loginError ?? this.loginError,
       passwordError: passwordError ?? this.passwordError,
-      passwordRepeatError: passwordRepeatError ?? this.passwordRepeatError
+      passwordRepeatError: passwordRepeatError ?? this.passwordRepeatError,
+      showPassword: showPassword ?? this.showPassword,
+      showPasswordRepeat: showPasswordRepeat ?? this.showPasswordRepeat,
     );
   }
 }

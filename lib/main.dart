@@ -88,7 +88,9 @@ class _AppViewState extends State<AppView> {
                 errorBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.red)),
                 focusedErrorBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.red)))),
+                    borderSide: BorderSide(color: Colors.red))
+            )
+        ),
         builder: (context, child) {
           return BlocListener<AuthenticationBloc, AuthenticationState>(
             listener: (context, state) {

@@ -38,7 +38,6 @@ class Login extends StatelessWidget {
                 children: [
                   const SizedBox(height: 150),
                   BlocBuilder<LoginBloc, LoginState>(
-                    buildWhen: (previous, current) => previous.loginError != current.loginError,
                     builder: (context, state) {
                       return TextField(
                         textInputAction: TextInputAction.next,
@@ -54,18 +53,25 @@ class Login extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   BlocBuilder<LoginBloc, LoginState>(
-                      buildWhen: (previous, current) => previous.passwordError != current.passwordError,
                       builder: (context, state) {
                         return TextField(
                           onSubmitted: (_) {
                             context.read<LoginBloc>().add(const LoginSubmit());
                           },
-                          obscureText: true,
+                          obscureText: !state.showPassword,
                           obscuringCharacter: '*',
                           onChanged: (password) => context
                               .read<LoginBloc>()
                               .add(LoginPasswordChanged(password)),
                           decoration: InputDecoration(
+                              suffix: GestureDetector(
+                                onTap: () {
+                                  context.read<LoginBloc>().add(const LoginShowPassword());
+                                },
+                                child: Icon(
+                                    state.showPassword ? Icons.visibility : Icons.visibility_off
+                                ),
+                              ),
                               label: const Text('Пароль'),
                               errorText: state.passwordError == '' ? null : state.passwordError
                           ),

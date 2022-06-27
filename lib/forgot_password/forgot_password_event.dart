@@ -27,6 +27,10 @@ class ClearForgotPasswordState extends ForgotPasswordEvent {
   const ClearForgotPasswordState();
 }
 
+class ForgotPasswordShowPasswordChange extends ForgotPasswordEvent {
+  const ForgotPasswordShowPasswordChange();
+}
+
 class ForgotPasswordSubmit extends ForgotPasswordEvent {
   const ForgotPasswordSubmit();
 }
