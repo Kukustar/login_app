@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:login_app/generated/l10n.dart';
 
 import 'package:login_app/registration/registration_bloc.dart';
 import 'package:login_app/registration/registration_event.dart';
 import 'package:login_app/registration/registration_state.dart';
+import 'package:login_app/services/transform_key_to_error.dart';
+
 
 class Registration extends StatelessWidget {
   const Registration({Key? key}) : super(key: key);
@@ -27,7 +30,7 @@ class Registration extends StatelessWidget {
         },
         child: Scaffold(
           appBar: AppBar(
-            title: const Text('Регистрация')
+            title: Text(S.of(context).registration)
             ),
           body: SingleChildScrollView(
             child: Padding(
@@ -35,7 +38,7 @@ class Registration extends StatelessWidget {
               child: Column(
                 children:  [
                   const SizedBox(height: 150),
-                  const Text('Введите данные для регистрации'),
+                  Text(S.of(context).enterTheRegistrationDetails),
                   const SizedBox(height: 10),
                   BlocBuilder<RegistrationBloc, RegistrationState>(
                       builder: (context, state) {
@@ -45,8 +48,8 @@ class Registration extends StatelessWidget {
                               .read<RegistrationBloc>()
                               .add(RegistrationLoginChanged(login)),
                           decoration: InputDecoration(
-                              label: const Text('Логин'),
-                              errorText: state.loginError == '' ? null : state.loginError
+                              label: Text(S.of(context).login),
+                              errorText: state.loginError == '' ? null : getErrorTranslation(context, state.loginError)
                           ),
                         );
                       }
@@ -71,8 +74,8 @@ class Registration extends StatelessWidget {
                                   state.showPassword ? Icons.visibility : Icons.visibility_off
                               ),
                             ),
-                            label: const Text('Пароль'),
-                            errorText: state.passwordError == '' ? null : state.passwordError
+                            label: Text(S.of(context).password),
+                            errorText: state.passwordError == '' ? null : getErrorTranslation(context, state.passwordError)
                           ),
                         );
                       }
@@ -100,8 +103,8 @@ class Registration extends StatelessWidget {
                                 state.showPasswordRepeat ? Icons.visibility : Icons.visibility_off
                               ),
                             ),
-                            label: const Text('Повтор пароля'),
-                            errorText: state.passwordRepeatError == '' ? null : state.passwordRepeatError
+                            label: Text(S.of(context).repeatPassword),
+                            errorText: state.passwordRepeatError == '' ? null : getErrorTranslation(context, state.passwordRepeatError)
                           ),
                         );
                       }
@@ -118,12 +121,11 @@ class Registration extends StatelessWidget {
                               if (!currentFocus.hasPrimaryFocus) {
                                 currentFocus.unfocus();
                               }
-
                               context
                                   .read<RegistrationBloc>()
                                   .add(const RegistrationSubmit());
                             },
-                            child: const Text('Регистрация')
+                            child: Text(S.of(context).registration)
                         );
                       },
                     ),

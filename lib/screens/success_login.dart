@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login_app/authentication/authentication_bloc.dart';
 import 'package:login_app/authentication/authentication_event.dart';
 import 'package:login_app/authentication/authentication_state.dart';
+import 'package:login_app/generated/l10n.dart';
 
 class SuccessLogin extends StatelessWidget {
   const SuccessLogin({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class SuccessLogin extends StatelessWidget {
             BlocProvider.of<AuthenticationBloc>(context, listen: false).add(const LogAut());
           },
         ),
-        title: const Text('Успешная авторизация'),
+        title: Text(S.of(context).successfulAuthorization),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -32,8 +33,8 @@ class SuccessLogin extends StatelessWidget {
               builder: (context, state) {
                 return state.memorableWorld.isNotEmpty ? Column(
                   children: [
-                    const Text(
-                        "Запомните этот ключ для восстановления пароля",
+                    Text(
+                      S.of(context).saveKeyForPasswordRecovery,
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 10,),

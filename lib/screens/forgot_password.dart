@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login_app/forgot_password/forgot_password_bloc.dart';
 import 'package:login_app/forgot_password/forgot_password_event.dart';
 import 'package:login_app/forgot_password/forgot_password_state.dart';
+import 'package:login_app/generated/l10n.dart';
+import 'package:login_app/services/transform_key_to_error.dart';
 
 class ForgotPassword extends StatelessWidget {
   const ForgotPassword({Key? key}) : super(key: key);
@@ -27,7 +29,7 @@ class ForgotPassword extends StatelessWidget {
         },
         child: Scaffold(
           resizeToAvoidBottomInset: true,
-          appBar: AppBar(title: const Text('Восстановление')),
+          appBar: AppBar(title: Text(S.of(context).recovery)),
           body: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -42,9 +44,10 @@ class ForgotPassword extends StatelessWidget {
                           .read<ForgotPasswordBloc>()
                           .add(ForgotPasswordLoginChanged(login)),
                       decoration: InputDecoration(
-                          label: const Text('Логин'),
+                          label: Text(S.of(context).login),
                           errorText:
-                              state.loginError == '' ? null : state.loginError),
+                              state.loginError == '' ? null : getErrorTranslation(context, state.loginError)
+                      ),
                     );
                   }),
                   const SizedBox(height: 10),
@@ -56,10 +59,11 @@ class ForgotPassword extends StatelessWidget {
                           .read<ForgotPasswordBloc>()
                           .add(ForgotPasswordMemorableWorldChange(memorableWorld)),
                       decoration: InputDecoration(
-                          label: const Text('Ключ для восстановления'),
+                          label: Text(S.of(context).recoveryKey),
                           errorText: state.memorableWorldError == ''
                               ? null
-                              : state.memorableWorldError),
+                              : getErrorTranslation(context, state.memorableWorldError)
+                      ),
                     );
                   }),
                   const SizedBox(height: 10),
@@ -87,10 +91,11 @@ class ForgotPassword extends StatelessWidget {
                                 state.showPassword ? Icons.visibility : Icons.visibility_off
                             ),
                           ),
-                          label: const Text('Новый пароль'),
+                          label: Text(S.of(context).newPassword),
                           errorText: state.newPasswordError == ''
                               ? null
-                              : state.newPasswordError),
+                              : getErrorTranslation(context, state.newPasswordError)
+                      ),
                     );
                   }),
                   const SizedBox(height: 10),
@@ -109,7 +114,7 @@ class ForgotPassword extends StatelessWidget {
                                 .read<ForgotPasswordBloc>()
                                 .add(const ForgotPasswordSubmit());
                           },
-                          child: const Text('Восстановить'),
+                          child: Text(S.of(context).recovery),
                         );
                       },
                     ),

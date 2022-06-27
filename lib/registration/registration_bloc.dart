@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:login_app/authentication/authentication_repository.dart';
 import 'package:login_app/registration/registration_event.dart';
 import 'package:login_app/registration/registration_state.dart';
+import 'package:login_app/services/transform_key_to_error.dart';
 
 class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
   RegistrationBloc({ required this.repository }) : super(const RegistrationState()) {
@@ -45,13 +46,13 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
     try {
       await repository.registration(state.login, state.password, state.passwordRepeat);
     } on LoginFieldEmpty  {
-      emit(state.copyWith(loginError: 'Поле не может быть пустым'));
+      emit(state.copyWith(loginError: EMPTY_FIELD));
     } on PasswordFieldEmpty {
-      emit(state.copyWith(passwordError: 'Поле не может быть пустым'));
+      emit(state.copyWith(passwordError: EMPTY_FIELD));
     }  on PasswordNotEqual {
-      emit(state.copyWith(passwordRepeatError: 'Пароли не совпадают'));
+      emit(state.copyWith(passwordRepeatError: PASSWORDS_NOT_MATCH));
     }  on UserAlreadyExist {
-      emit(state.copyWith(loginError: 'Пользователь с таким логином уже существует'));
+      emit(state.copyWith(loginError: USER_EXIST));
     } catch (exception) {
       if (kDebugMode) {
         print('Error in _onRegistrationSubmit $exception');
